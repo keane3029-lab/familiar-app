@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coaching &amp; Family Meetings"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/soft_text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teens set goals &amp; reflect. Family meetings solve disagreements calmly."
+            android:textSize="14sp"
+            android:textColor="@color/subtle_gray"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Teen Coaching Goal Form -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/calm_surface">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Teen Weekly Coaching Goal"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/teal_primary" />
+
+                <EditText
+                    android:id="@+id/et_coaching_goal_mins"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Set Weekly Goal (e.g. Max 120 mins/day)"
+                    android:inputType="number"
+                    android:layout_marginTop="8dp" />
+
+                <EditText
+                    android:id="@+id/et_coaching_reflection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Short Weekly Reflection (e.g. Balanced study &amp; gaming well)"
+                    android:layout_marginTop="4dp" />
+
+                <Button
+                    android:id="@+id/btn_save_coaching_goal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Save Coaching Goal (Summary Visible to Parent)"
+                    android:backgroundTint="@color/teal_primary"
+                    android:textColor="@color/calm_surface"
+                    android:layout_marginTop="12dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Family Meeting Tool -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/calm_surface">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Structured Family Meeting Agenda"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/soft_text" />
+
+                <EditText
+                    android:id="@+id/et_meeting_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Meeting Subject (e.g. Weekend Curfew &amp; Screen Time)"
+                    android:layout_marginTop="8dp" />
+
+                <EditText
+                    android:id="@+id/et_wants"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="What each person wants"
+                    android:layout_marginTop="4dp" />
+
+                <EditText
+                    android:id="@+id/et_worries"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="What worries each person"
+                    android:layout_marginTop="4dp" />
+
+                <EditText
+                    android:id="@+id/et_compromise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="One proposed compromise"
+                    android:layout_marginTop="4dp" />
+
+                <Button
+                    android:id="@+id/btn_save_family_agreement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Create Family Agreement (48h Cooldown Guard)"
+                    android:backgroundTint="@color/sage_accent"
+                    android:textColor="@color/calm_surface"
+                    android:layout_marginTop="12dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Active Agreements List -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Family Agreements Document"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/soft_text"
+            android:layout_marginBottom="8dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_agreements"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+    </LinearLayout>
+</ScrollView>

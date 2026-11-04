@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Familiar</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_rules">Rules &amp; Agreements</string>
+    <string name="title_transparency">Transparency</string>
+    <string name="title_trust">Trust &amp; Promises</string>
+    <string name="title_requests">Requests &amp; Check-In</string>
+    <string name="title_coaching">Coaching &amp; Meeting</string>
+    <string name="privacy_policy_title">Familiar Privacy Policy</string>
+    <string name="emergency_override">Emergency Override</string>
+    <string name="request_grace">Request 15m Grace</string>
+    <string name="propose_rule">Propose New Rule</string>
+    <string name="talk_before_block">Talk Before Block Check-In</string>
+</resources>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agreed Rules Engine"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/soft_text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rules are proposed, negotiated, and agreed upon together."
+            android:textSize="14sp"
+            android:textColor="@color/subtle_gray"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Propose Rule Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/calm_surface">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Propose or Edit a Rule"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/teal_primary" />
+
+                <EditText
+                    android:id="@+id/et_rule_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Rule Title (e.g. Bedtime Wind-Down)"
+                    android:layout_marginTop="8dp" />
+
+                <EditText
+                    android:id="@+id/et_rule_app"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Target App or Category (e.g. Social Media)"
+                    android:layout_marginTop="4dp" />
+
+                <EditText
+                    android:id="@+id/et_rule_limit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Daily Limit in Minutes (e.g. 120)"
+                    android:inputType="number"
+                    android:layout_marginTop="4dp" />
+
+                <!-- Category Selector -->
+                <RadioGroup
+                    android:id="@+id/rg_rule_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <RadioButton
+                        android:id="@+id/rb_parent_set"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Parent Set"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:id="@+id/rb_teen_decided"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Teen Decided" />
+                </RadioGroup>
+
+                <!-- Preview / Conflict Alert Box -->
+                <TextView
+                    android:id="@+id/tv_rule_preview_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#E8F5E9"
+                    android:padding="8dp"
+                    android:text="Preview: Rule restricts target app after limit. No conflicts detected."
+                    android:textSize="12sp"
+                    android:textColor="@color/soft_text"
+                    android:layout_marginTop="8dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp">
+
+                    <Button
+                        android:id="@+id/btn_preview_rule"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Preview Mode"
+                        android:backgroundTint="@color/sage_accent"
+                        android:textColor="@color/calm_surface"
+                        android:layout_marginEnd="8dp" />
+
+                    <Button
+                        android:id="@+id/btn_save_rule"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Propose Rule"
+                        android:backgroundTint="@color/teal_primary"
+                        android:textColor="@color/calm_surface" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Active and Proposed Rules List -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current Rules &amp; Proposals"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/soft_text"
+            android:layout_marginBottom="8dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_rules"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+    </LinearLayout>
+</ScrollView>

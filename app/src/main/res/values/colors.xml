@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="teal_primary">#1D6F68</color>
+    <color name="teal_dark">#124843</color>
+    <color name="sage_accent">#7DA393</color>
+    <color name="warm_cream">#FBF9F5</color>
+    <color name="calm_surface">#FFFFFF</color>
+    <color name="soft_text">#2C3531</color>
+    <color name="subtle_gray">#76827D</color>
+    <color name="soft_border">#E0E5E2</color>
+    <color name="soft_green">#388E3C</color>
+    <color name="soft_amber">#F57C00</color>
+    <color name="soft_blue">#1976D2</color>
+</resources>

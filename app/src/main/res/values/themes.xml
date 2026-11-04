@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.Familiar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/teal_primary</item>
+        <item name="colorPrimaryVariant">@color/teal_dark</item>
+        <item name="colorOnPrimary">@color/calm_surface</item>
+        <item name="colorSecondary">@color/sage_accent</item>
+        <item name="android:colorBackground">@color/warm_cream</item>
+        <item name="colorSurface">@color/calm_surface</item>
+        <item name="android:textColorPrimary">@color/soft_text</item>
+        <item name="android:textColorSecondary">@color/subtle_gray</item>
+    </style>
+</resources>

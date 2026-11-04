@@ -1,0 +1,8 @@
+# Location of the SDK. This is only used by Gradle.
+# For desktop developers:
+# sdk.dir=/Users/username/Library/Android/sdk
+# For mobile developers (Termux / Android phone):
+# sdk.dir=/data/data/com.termux/files/usr/lib/android-sdk
+
+# Cloud Sync Configuration Key (Optional)
+FAMILIAR_CLOUD_SYNC_KEY=your_optional_sync_key_here

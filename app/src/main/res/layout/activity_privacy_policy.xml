@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/warm_cream">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Familiar Privacy Policy"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/soft_text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Updated: November 2026 • Plain English Guarantee"
+            android:textSize="12sp"
+            android:textColor="@color/subtle_gray"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. What We Store and Where
+Familiar is built as a local-first application. All rules, trust scores, check-ins, and usage totals are stored locally in an encrypted Room SQLite database on your device.
+
+2. Zero Message or Browsing History Content
+Familiar NEVER collects, records, monitors, or transmits message body text, private chats, emails, browsing history, URLs, search queries, or keystrokes. Monitoring is strictly high-level category screen time totals (e.g., '2h 10m social media today').
+
+3. Equal Transparency
+Whatever data the parent can view, the teen can also view on their screen at all times. There are no hidden tracking modes or silent camera/mic access.
+
+4. Cloud Sync Layer
+If you explicitly enable optional cloud sync in local.properties, data is end-to-end synced using user-controlled parameters. If disabled, 100% of data remains exclusively on your physical phone.
+
+5. No Data Selling or Ads
+Familiar is open source software. We do not sell data to advertisers, use third-party analytics trackers, or implement dark pattern guilt mechanics."
+            android:textSize="14sp"
+            android:textColor="@color/soft_text"
+            android:lineSpacingExtra="6dp" />
+
+    </LinearLayout>
+</ScrollView>
