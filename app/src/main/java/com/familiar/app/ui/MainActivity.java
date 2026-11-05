@@ -12,6 +12,7 @@ import com.familiar.app.ui.dashboard.DashboardFragment;
 import com.familiar.app.ui.privacy.TransparencyFragment;
 import com.familiar.app.ui.rules.RuleManagerFragment;
 import com.familiar.app.ui.trust.TrustFragment;
+import com.familiar.app.util.PermissionHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (android.os.Build.VERSION.SDK_INT >= 33) {
+            requestPermissions(new String[]{"android.permission.POST_NOTIFICATIONS"}, 1001);
+        }
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnItemSelectedListener(item -> {
@@ -51,6 +56,14 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new DashboardFragment())
                     .commit();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (PermissionHelper.hasUsageAccess(this) == false) {
+            startActivity(PermissionHelper.usageAccessIntent());
         }
     }
 }
