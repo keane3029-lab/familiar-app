@@ -1,48 +1,89 @@
 # Familiar - Native Android Parenting & Family Trust App
 
-**Familiar** (`com.familiar.app`) is a native Android parenting application written in Java. Familiar redefines family safety by building mutual trust rather than unilateral control. In Familiar, parents and teens negotiate rules together, teens keep growing their independence, monitoring is transparent and high-level, and family arguments are prevented through structured check-ins and cooldown periods.
+**Familiar** (`com.familiar.app`) is a native Android parenting app written in Java. Familiar is built on mutual trust rather than unilateral control. Parents and teens negotiate rules together, teens keep earning independence, monitoring is transparent and high-level, and family arguments are cooled down with structured check-ins.
+
+Familiar was started on a phone in Termux and is compiled automatically by GitHub Actions.
 
 ---
 
-## 📱 Building on a Phone
+## Status
 
-Familiar is designed with a phone-friendly setup so developers or users can open, inspect, modify, and build the project directly from an Android mobile device.
+Early build. The core structure, data models and screens are in place, but many features are still being wired together, so expect rough edges and crashes. Each debug build is produced by the CI workflow in `.github/workflows/build-apk.yml`.
 
-### Method 1: Using Termux + Gradle Wrapper (On Phone)
+---
+
+## Download
+
+Grab the latest APK from the Releases page:
+https://github.com/keane3029-lab/familiar-app/releases
+
+1. Open the latest release.
+2. Download `app-debug.apk` from the **Assets** section.
+3. Install it on your Android device. You may need to allow installs from your browser or file manager.
+
+Each build from the CI workflow is also available under the **Actions** tab as the `familiar-debug-apk` artifact.
+
+---
+
+## Building on a Phone
+
+Familiar is designed so it can be opened, inspected, modified and built directly from an Android phone.
+
+### Method 1: Termux (on phone)
 1. Install **Termux** on your Android phone.
-2. Install OpenJDK 17 and Git inside Termux:
+2. Install OpenJDK 17, Git and Gradle inside Termux:
    ```bash
-   pkg update && pkg install openjdk-17 git
+   pkg update && pkg install openjdk-17 git gradle
    ```
-3. Unzip the project:
+3. Clone the repo:
    ```bash
-   unzip familiar-app.zip -d familiar
-   cd familiar
+   git clone https://github.com/keane3029-lab/familiar-app.git
+   cd familiar-app
    ```
-4. Build the debug APK directly on your phone:
+4. Build the debug APK. The repo does not include a Gradle wrapper yet, so use the installed Gradle:
    ```bash
-   ./gradlew assembleDebug
+   gradle assembleDebug
    ```
-5. The output APK will be located at `app/build/outputs/apk/debug/app-debug.apk`. Tap to install!
+5. The APK ends up in `app/build/outputs/apk/debug/app-debug.apk`. Tap it to install.
 
-### Method 2: Using Mobile IDEs (e.g. AIDE or Android Studio Remote)
-1. Open your mobile IDE or file manager.
-2. Select **Open Existing Project** and navigate to the extracted `familiar` root directory containing `settings.gradle` and `build.gradle`.
-3. The IDE will index Java source files in `app/src/main/java` and layouts in `app/src/main/res/layout`.
+### Method 2: Mobile IDE (e.g. AIDE)
+1. Open your mobile IDE.
+2. Select **Open Existing Project** and choose the project root, the folder that contains `settings.gradle` and `build.gradle`.
+3. The IDE will index Java sources in `app/src/main/java` and layouts in `app/src/main/res/layout`.
 
-### Method 3: Desktop Android Studio Setup
-1. Extract `familiar-app.zip`.
-2. Open Android Studio -> **Open an Existing Project** -> Select the project root folder.
-3. Sync Gradle and run on an emulator or physical device running Android 8.0+ (API 26+).
+### Method 3: Desktop Android Studio
+1. Clone or extract the project.
+2. Open Android Studio, choose **Open** and select the project root.
+3. Sync Gradle and run on an emulator or a physical device running Android 8.0 or newer (API 26+).
 
 ---
 
-## 🏗️ Project Structure
+## Features (planned and in progress)
+
+Familiar aims to solve ten common parent-teen problems:
+
+| # | Problem | Planned feature | Primary source file(s) |
+|---|---|---|---|
+| 1 | Too much control | Proposed and agreed rules. Parents propose, teens accept or counter-propose. Parent-set rules and teen-decided settings are clearly separated. | `Rule.java`, `RuleEngine.java`, `RuleManagerFragment.java` |
+| 2 | Loss of privacy | Transparency by default. The teen sees the same dashboard the parent sees. Only category and screen time totals are shown, with no message content, browsing history or private messages. | `TransparencyFragment.java`, `UsageSummary.java`, `PrivacyPolicyActivity.java` |
+| 3 | Limited freedom | Tiered trust levels (Level 1 to Level 4). Teens unlock higher levels by meeting agreed goals. Each level grants specific freedoms such as bedtime flexibility, app choices and purchase approvals. | `TrustLevel.java`, `TrustManager.java`, `TrustFragment.java` |
+| 4 | Trust issues | Shared trust log. Both sides record kept and missed promises. The trust score only changes through agreed milestones and is visible to both. | `TrustLogEntry.java`, `TrustDao.java`, `TrustFragment.java` |
+| 5 | Communication problems | "Talk before block" check-ins. Before a restriction is enforced, the app prompts a conversation, and the teen can send an explanation the parent sees before decisions are final. | `CheckIn.java`, `CheckInDao.java`, `CheckInFragment.java` |
+| 6 | Accidental lockouts | Emergency override that works even when restrictions are active. A protected allowlist (school apps, calls, maps, emergency contacts) can never be locked. Warnings at 10 and 2 minutes, plus a one-tap grace extension request. | `EmergencyOverrideManager.java`, `EmergencyOverrideActivity.java` |
+| 7 | Unfair app restrictions | App access requests with a reason. The parent gets a 24-hour decision window and a usage summary to decide with. | `AppAccessRequest.java`, `AppAccessRequestDao.java`, `CheckInFragment.java` |
+| 8 | Technical problems | Rule engine with preview mode, conflict detection (overlapping bedtimes and limits), a plain-language activity log and offline-safe Room SQLite storage. | `RuleEngine.java`, `ActivityLogEntry.java`, `CloudSyncManager.java`, `ScheduledRuleCheckWorker.java` |
+| 9 | Less independence | Coaching mode. The teen sets their own weekly screen time goal, writes a short reflection and proposes solutions first. The parent sees a summary. | `CoachingGoal.java`, `CoachingDao.java`, `CoachingFragment.java` |
+| 10 | Family arguments | Family meeting tool with a structured agenda (wants, worries, proposed compromise). Agreements are saved as documents. Changes trigger a 48-hour cooldown and require a written reason. | `FamilyAgreement.java`, `FamilyMeetingDao.java`, `CoachingFragment.java` |
+
+---
+
+## Project Structure
 
 ```
-Familiar/
+familiar-app/
+├── .github/workflows/build-apk.yml
 ├── .gitignore
-├── LICENSE (MIT)
+├── LICENSE
 ├── CONTRIBUTING.md
 ├── README.md
 ├── build.gradle
@@ -84,32 +125,26 @@ Familiar/
 
 ---
 
-## 🎯 How Each Problem is Solved
+## Running Unit Tests
 
-| # | Problem | Specific Feature & Solution | Primary Source File(s) |
-|---|---|---|---|
-| 1 | **Too Much Control** | Proposed and agreed rules model. Parent proposes or sets rules, teen accepts/proposes compromises. Explicit distinction between parent-set rules and teen-decided settings. | `Rule.java`<br>`RuleEngine.java`<br>`RuleManagerFragment.java` |
-| 2 | **Loss of Privacy** | Default complete transparency. The teen screen displays the exact dashboard the parent sees. Category and screen time totals only ("2h 10m social media today"), zero message content, browsing history, or private messages monitored. | `TransparencyFragment.java`<br>`UsageSummary.java`<br>`PrivacyPolicyActivity.java` |
-| 3 | **Limited Freedom** | Tiered trust levels (Level 1 to Level 4). Teens unlock higher levels by meeting agreed goals over time. Each level grants specific freedom parameters (bedtime flexibility, app choices, purchase approvals). | `TrustLevel.java`<br>`TrustManager.java`<br>`TrustFragment.java` |
-| 4 | **Trust Issues** | Shared trust log. Both parent and teen log kept promises and missed promises. Trust progress score is visible to both and changes only through agreed milestones. | `TrustLogEntry.java`<br>`TrustDao.java`<br>`TrustFragment.java` |
-| 5 | **Communication Problems** | "Talk before block" check-in feature. Before a restriction is enforced, the app prompts a conversation. Teen sends an explanation message shown to the parent before decisions are final. | `CheckIn.java`<br>`CheckInDao.java`<br>`CheckInFragment.java` |
-| 6 | **Accidental Phone Lockouts** | Emergency override button active even when all restrictions are active. Protected allowlist for school apps, calls, maps, and emergency contacts that can NEVER be locked. 10m/2m warnings & 1-tap grace extension request. | `EmergencyOverrideManager.java`<br>`EmergencyOverrideActivity.java` |
-| 7 | **Unfair App Restrictions** | App access request with reason. Parent gets a 24-hour decision window and receives an app usage summary (category, daily average) to make informed decisions. | `AppAccessRequest.java`<br>`AppAccessRequestDao.java`<br>`CheckInFragment.java` |
-| 8 | **Technical Problems** | Reliable rule engine with preview mode, conflict detection (overlapping bedtimes/limits), plain-language activity log, and offline-safe Room SQLite local storage. | `RuleEngine.java`<br>`ActivityLogEntry.java`<br>`CloudSyncManager.java`<br>`ScheduledRuleCheckWorker.java` |
-| 9 | **Less Independence** | Coaching mode where the teen sets their own weekly screen time goal and writes a short reflection. Parent sees summary view, and the app prompts the teen to propose solutions first. | `CoachingGoal.java`<br>`CoachingDao.java`<br>`CoachingFragment.java` |
-| 10 | **Family Arguments** | Family meeting tool with structured agenda (wants, worries, proposed compromise). Agreements are saved as documents. Changes trigger a 48-hour cooldown period and require a written reason. | `FamilyAgreement.java`<br>`FamilyMeetingDao.java`<br>`CoachingFragment.java` |
-
----
-
-## 🧪 Running Unit Tests
-
-Run JUnit unit tests for the Rule Engine and Trust Level logic via Gradle:
+Run the JUnit tests for the rule engine and trust logic:
 ```bash
-./gradlew test
+gradle test
 ```
-Test results will be available in `app/build/reports/tests/testDebugUnitTest/index.html`.
+Results appear in `app/build/reports/tests/testDebugUnitTest/index.html`.
 
 ---
 
-## 🔒 Privacy & Data Policy
-Familiar stores 100% of rules, logs, and summaries locally using an embedded SQLite Room database. No private message content, keystrokes, or browsing histories are recorded. Cloud sync is disabled by default and can be optionally configured in `local.properties`.
+## Privacy & Data
+
+Familiar stores rules, logs and summaries locally in an embedded SQLite Room database. No private message content, keystrokes or browsing history are recorded. Cloud sync is off by default and can be configured in `local.properties`.
+
+---
+
+## License
+
+MIT. See `LICENSE`.
+
+## Contributing
+
+See `CONTRIBUTING.md`.
