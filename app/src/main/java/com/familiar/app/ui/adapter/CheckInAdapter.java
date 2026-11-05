@@ -32,7 +32,7 @@ public class CheckInAdapter extends RecyclerView.Adapter<CheckInAdapter.CheckInV
     public void onBindViewHolder(@NonNull CheckInViewHolder holder, int position) {
         CheckIn item = checkIns.get(position);
         holder.tvTitle.setText("Check-In: " + item.getRestrictionTitle());
-        holder.tvDispute.setText("Teen message: "" + item.getDisputeMessage() + """);
+        holder.tvDispute.setText("Teen message: " + item.getDisputeMessage());
     }
 
     @Override

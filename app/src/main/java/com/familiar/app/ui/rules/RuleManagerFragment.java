@@ -58,12 +58,9 @@ public class RuleManagerFragment extends Fragment {
             RuleEngine.RulePreviewResult preview = engine.previewRule(tempRule, db.ruleDao().getAllRules());
 
             StringBuilder sb = new StringBuilder();
-            sb.append("PREVIEW MODE:
-");
-            sb.append("• Estimated time saved: ").append(preview.getEstimatedHoursSaved()).append("h daily
-");
-            sb.append("• Apps impacted: ").append(preview.getImpactedAppCount()).append("
-");
+            sb.append("PREVIEW MODE:\n");
+            sb.append("• Estimated time saved: ").append(preview.getEstimatedHoursSaved()).append("h daily\n");
+            sb.append("• Apps impacted: ").append(preview.getImpactedAppCount()).append("\n");
             if (preview.hasConflicts()) {
                 sb.append("• WARNING: ").append(preview.getDetectedConflicts().get(0));
             } else {
